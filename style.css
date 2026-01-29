@@ -1,0 +1,313 @@
+:root {
+    --bg-color: #0f1014;
+    --card-bg: #1a1c23;
+    --accent: #ff4dce;
+    --accent-secondary: #00f2ff;
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+    --font-heading: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.background-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--accent);
+    top: -100px;
+    right: -100px;
+    animation: float 20s infinite alternate;
+}
+
+.blob-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent-secondary);
+    bottom: -50px;
+    left: -50px;
+    animation: float 15s infinite alternate-reverse;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 100px); }
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 3rem;
+    letter-spacing: -2px;
+    margin-bottom: 0.5rem;
+}
+
+.accent {
+    color: var(--accent);
+    text-shadow: 0 0 20px rgba(255, 77, 206, 0.4);
+}
+
+.subtitle {
+    color: var(--text-dim);
+    font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+.metronome-card {
+    background: var(--card-bg);
+    padding: 3rem 2rem;
+    border-radius: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.visualizer {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.beat-indicator {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 4px solid var(--accent);
+    margin-bottom: 1.5rem;
+    transition: transform 0.1s ease-out;
+    box-shadow: 0 0 0 rgba(255, 77, 206, 0);
+}
+
+.beat-indicator.pulse {
+    background: var(--accent);
+    transform: scale(1.1);
+    box-shadow: 0 0 30px var(--accent);
+}
+
+.beat-indicator.pulse-secondary {
+    border-color: var(--accent-secondary);
+    background: var(--accent-secondary);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--accent-secondary);
+}
+
+.sub-indicators {
+    display: flex;
+    gap: 12px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background 0.1s;
+}
+
+.dot.active {
+    background: var(--text-main);
+    box-shadow: 0 0 10px var(--text-main);
+}
+
+.bpm-display {
+    margin-bottom: 1.5rem;
+}
+
+#bpm-value {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    display: block;
+}
+
+.bpm-display .label {
+    color: var(--text-dim);
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.slider-container {
+    margin: 2rem 0;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: var(--text-main);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.slider-marks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+}
+
+.play-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    background: var(--text-main);
+    color: var(--bg-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background 0.2s;
+    margin: 0 auto;
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+}
+
+.play-btn:active {
+    transform: scale(0.95);
+}
+
+.play-btn svg {
+    width: 32px;
+    height: 32px;
+}
+
+.hidden {
+    display: none;
+}
+
+.secondary-controls {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 2rem;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+}
+
+.number-input {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.number-input button {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--text-main);
+}
+
+.shortcuts {
+    margin-top: 2rem;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+@media (max-width: 480px) {
+    .metronome-card {
+        padding: 2rem 1.5rem;
+    }
+    #bpm-value {
+        font-size: 4rem;
+    }
+}
